@@ -1,0 +1,612 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Cube Academy",
+        "description": "API for the Cube Academy technical task",
+        "contact": {
+            "name": "Andy Haswell",
+            "email": "andy@3sidedcube.com",
+            "url": "https://cube-academy-api.cubeapis.com/docs"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://cube-academy-api.cubeapis.com"
+        }
+    ],
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Login",
+                "description": "Login an existing user",
+                "operationId": "cube-academy-login",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "test@test.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "<string>"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/authToken"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/error"
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "https://cube-academy-api.cubeapis.com"
+                    }
+                ]
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Register",
+                "description": "Register a new user",
+                "operationId": "cube-academy-register",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "<string>"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "<email>"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "<password>"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/authToken"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/error"
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "https://cube-academy-api.cubeapis.com"
+                    }
+                ]
+            }
+        },
+        "/api/nominee": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Nominee",
+                "description": "Retrieve a complete list of all nominees",
+                "operationId": "cube-academy-retrieve-nominee-list",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/nominee"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "https://cube-academy-api.cubeapis.com"
+                    }
+                ]
+            }
+        },
+        "/api/nomination": {
+            "post": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Create Nomination",
+                "description": "Create a new nomination",
+                "operationId": "cube-academy-create-nomination",
+                "requestBody": {
+                    "description": "Nomination Create Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nominee_id": {
+                                        "type": "string",
+                                        "description": "Must be a valid nominee_id"
+                                    },
+                                    "reason": {
+                                        "type": "string"
+                                    },
+                                    "process": {
+                                        "type": "string",
+                                        "description": "One of the following values: very_unfair,unfair,not_sure,fair,very_fair"
+                                    }
+                                },
+                                "required": [
+                                    "nominee_id",
+                                    "reason",
+                                    "process"
+                                ],
+                                "x-examples": {
+                                    "Example 1": {
+                                        "nominee_id": "{{nominee_id}}",
+                                        "reason": "{{reason}}",
+                                        "process": "{{process}}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/nomination"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "https://cube-academy-api.cubeapis.com"
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Get All Nominations",
+                "description": "Retrieves all nominations set by the user",
+                "operationId": "cube-academy-get-all-nominations",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/nominations"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "https://cube-academy-api.cubeapis.com"
+                    }
+                ]
+            }
+        },
+        "/api/nomination/{nomination_id}": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Get Nomination By ID",
+                "description": "Retrieve a specific nomination by ID",
+                "operationId": "cube-academy-get-nomination-by-id",
+                "parameters": [
+                    {
+                        "name": "nomination_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/nomination"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "https://cube-academy-api.cubeapis.com"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Update Nomination",
+                "description": "Update a specific existing nominiation",
+                "operationId": "cube-academy-update-nomination",
+                "parameters": [
+                    {
+                        "name": "nomination_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update Nomination Request - at least one of the following values is required.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nominee_id": {
+                                        "type": "string",
+                                        "description": "Must be a valid nominee_id"
+                                    },
+                                    "reason": {
+                                        "type": "string"
+                                    },
+                                    "process": {
+                                        "type": "string",
+                                        "description": "Must be one of the following values: very_unfair,unfair,not_sure,fair,very_fair"
+                                    }
+                                },
+                                "x-examples": {
+                                    "Example 1": {
+                                        "nominee_id": "{{nominee_id}}",
+                                        "reason": "{{reason}}",
+                                        "process": "{{process}}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/nomination"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "https://cube-academy-api.cubeapis.com"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Delete Nomination",
+                "description": "Delete a specific existing nomination",
+                "operationId": "cube-academy-delete-nomination",
+                "parameters": [
+                    {
+                        "name": "nomination_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/deletion"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "https://cube-academy-api.cubeapis.com"
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "api"
+        }
+    ],
+    "components": {
+        "requestBodies": {
+            "nomination": {
+                "description": "Nomination Create Request - at least one of the following is required",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "nominee_id": {
+                                    "type": "string",
+                                    "description": "Must be a valid nominee_id"
+                                },
+                                "reason": {
+                                    "type": "string"
+                                },
+                                "process": {
+                                    "type": "string",
+                                    "description": "One of the following values: very_unfair,unfair,not_sure,fair,very_fair"
+                                }
+                            },
+                            "x-examples": {
+                                "Example 1": {
+                                    "nominee_id": "{{nominee_id}}",
+                                    "reason": "{{reason}}",
+                                    "process": "{{process}}"
+                                }
+                            }
+                        }
+                    },
+                    "application/xml": {
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        },
+        "responses": {
+            "nominee": {
+                "description": "Nominee response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nominee_id": {
+                                                "type": "string"
+                                            },
+                                            "first_name": {
+                                                "type": "string"
+                                            },
+                                            "last_name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "x-examples": {
+                                "Example 1": {
+                                    "data": [
+                                        {
+                                            "nominee_id": "9a4bd093-e74c-4918-87cc-0c689cca78bf",
+                                            "first_name": "Alex",
+                                            "last_name": "Errington"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "nominations": {
+                "description": "Nominations response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nomination_id": {
+                                                "type": "string"
+                                            },
+                                            "nominee_id": {
+                                                "type": "string"
+                                            },
+                                            "reason": {
+                                                "type": "string"
+                                            },
+                                            "process": {
+                                                "type": "string"
+                                            },
+                                            "date_submitted": {
+                                                "type": "string"
+                                            },
+                                            "closing_date": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "x-examples": {
+                                "Example 1": {
+                                    "data": [
+                                        {
+                                            "nomination_id": "9a57b37f-33f0-4995-9e80-b25205132f3f",
+                                            "nominee_id": "9a4bd093-e74c-4918-87cc-0c689cca78bf",
+                                            "reason": "This is a nomination reason",
+                                            "process": "not_sure",
+                                            "date_submitted": "2023-10-11",
+                                            "closing_date": "2023-10-11"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "nomination": {
+                "description": "Nomination response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "nomination_id": {
+                                            "type": "string"
+                                        },
+                                        "nominee_id": {
+                                            "type": "string"
+                                        },
+                                        "reason": {
+                                            "type": "string"
+                                        },
+                                        "process": {
+                                            "type": "string"
+                                        },
+                                        "date_submitted": {
+                                            "type": "string"
+                                        },
+                                        "closing_date": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "x-examples": {
+                                "Example 1": {
+                                    "data": {
+                                        "nomination_id": "9a57b37f-33f0-4995-9e80-b25205132f3f",
+                                        "nominee_id": "9a4bd093-e74c-4918-87cc-0c689cca78bf",
+                                        "reason": "This is a nomination reason",
+                                        "process": "not_sure",
+                                        "date_submitted": "2023-10-11 08:57:22",
+                                        "closing_date": "2023-10-11 08:57:22"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "deletion": {
+                "description": "Deletion response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "string"
+                                }
+                            },
+                            "x-examples": {
+                                "Example 1": {
+                                    "data": "Nomination deleted successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "authToken": {
+                "description": "Auth Token response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "authToken": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "x-examples": {
+                                "Example 1": {
+                                    "data": {
+                                        "authToken": "7|UEiQzgVSKrxzofYguxTeCx5XP9MDy7tI7TIYA6ly7f27b944"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "error": {
+                "description": "Error response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "x-examples": {
+                                "Example 1": {
+                                    "data": {
+                                        "error": "User already exists"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
