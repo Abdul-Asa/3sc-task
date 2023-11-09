@@ -3,7 +3,7 @@ import Logo from "./Logo";
 import { InboxIcon, PlusIcon } from "./Icons";
 export default function Navbar() {
   return (
-    <nav className="flex h-[72px] w-full box-border items-center justify-between px-[36px] bg-primary-black">
+    <nav className="flex h-[72px] w-full box-border items-center justify-between px-[36px] bg-primary-black z-10">
       <Link href="/">
         <Logo />
       </Link>
