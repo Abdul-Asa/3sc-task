@@ -2,7 +2,7 @@ import axios from "axios";
 import { cookies } from "next/headers";
 
 export default async function Home() {
-  const auth = cookies().get("token")?.value ?? "None";
+  const auth = cookies().get("auth-token")?.value ?? "None";
   const nominees = await getNominees();
 
   async function submitLogin(formData: FormData) {
@@ -11,7 +11,7 @@ export default async function Home() {
     try {
       const response = await axios.post(endpoint, formData);
       console.log(response.data);
-      cookies().set("token", response.data.data.authToken);
+      cookies().set("auth-token", response.data.data.authToken);
     } catch (error) {
       console.error("There was an error submitting the form", error);
     }
@@ -23,6 +23,7 @@ export default async function Home() {
     try {
       const response = await axios.post(endpoint, formData);
       console.log(response.data);
+      cookies().set("auth-token", response.data.data.authToken);
     } catch (error) {
       console.error("There was an error submitting the form", error);
     }
