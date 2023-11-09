@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["var(--font-poppins)"],
+        anonpro: ["var(--font-anon-pro)"],
+      },
       colors: {
         primary: {
           green: "#A0FF1F",
@@ -29,6 +33,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 export default config;

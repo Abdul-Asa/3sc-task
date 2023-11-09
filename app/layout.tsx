@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins, Anonymous_Pro } from "next/font/google";
+
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-poppins",
+});
+
+const anon_pro = Anonymous_Pro({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-anon-pro",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,9 +29,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body
+        className={`${poppins.variable} ${anon_pro.variable} min-h-screen flex flex-col`}
+      >
         <Navbar />
-        <main className="flex h-[calc(100vh-72px)] flex-col items-center justify-between lg:px-20 lg:pt-10 lg:pb-20 bg-red-300">
+        <main className="flex h-[calc(100vh-72px)] flex-col items-center justify-center lg:px-20 lg:pt-10 lg:pb-20 bg-primary-gradient">
           {children}
         </main>
         <Footer />
