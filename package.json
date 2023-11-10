@@ -9,14 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.8.1",
     "axios": "^1.6.1",
     "clsx": "^2.0.0",
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.48.2",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
+    "@openapi-codegen/cli": "^2.0.0",
+    "@openapi-codegen/typescript": "^8.0.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20",
     "@types/react": "^18",
