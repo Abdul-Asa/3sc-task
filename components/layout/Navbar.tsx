@@ -3,10 +3,10 @@ import { FullLogo, ShortLogo } from "./Logo";
 import { InboxIcon, PlusIcon } from "./Icons";
 export default function Navbar() {
   return (
-    <nav className="flex h-[72px] w-full box-border items-center justify-between px-[36px] bg-primary-black z-10">
+    <nav className="flex h-[72px] w-full box-border items-center justify-between px-[36px] bg-primary-black">
       <Link href="/">
-        <FullLogo className="hidden lg:inline" />
-        <ShortLogo className="inline lg:hidden" />
+        <FullLogo isHidden />
+        <ShortLogo isHidden />
       </Link>
       <div className="flex items-center gap-6">
         <p className="hidden lg:inline font-anonpro underline">

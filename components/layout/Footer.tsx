@@ -5,14 +5,14 @@ import {
   XIcon,
   YoutubeIcon,
 } from "./Icons";
-import { FullLogo } from "./Logo";
+import { FooterLogo } from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="px-[10%] py-6 bg-primary-black z-10">
+    <footer className="px-[10%] py-6 bg-primary-black ">
       <div className="flex w-full h-full flex-col justify-between">
         <div className="flex w-full h-full lg:items-start flex-col">
-          <FullLogo />
+          <FooterLogo />
           <div className="flex h-0.5 my-6 w-full bg-primary-white" />
           <div className="flex justify-between w-full flex-col lg:flex-row items-start">
             <div className="flex justify-between flex-col lg:flex-row gap-2 lg:gap-6">
