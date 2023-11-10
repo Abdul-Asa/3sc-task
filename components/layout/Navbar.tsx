@@ -8,7 +8,7 @@ export default function Navbar() {
         <FullLogo isHidden />
         <ShortLogo isHidden />
       </Link>
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4">
         <p className="hidden lg:inline font-anonpro underline">
           Your Nominations (3)
         </p>

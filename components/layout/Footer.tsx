@@ -9,7 +9,7 @@ import { FooterLogo } from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="px-[10%] py-6 bg-primary-black ">
+    <footer className="px-[10%] py-6 bg-primary-black lg:m-0 mb-[92px]">
       <div className="flex w-full h-full flex-col justify-between">
         <div className="flex w-full h-full lg:items-start flex-col">
           <FooterLogo />
