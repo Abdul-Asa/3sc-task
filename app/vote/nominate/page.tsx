@@ -1,7 +1,25 @@
-"use client";
 import { FormWrapper } from "@/components/form/FormWrapper";
+import CustomSelect from "@/components/ui/CustomSelect";
+import axios from "axios";
+import { cookies } from "next/headers";
 
-export default function Nominate() {
+export default async function Nominate() {
+  let nominees = null;
+  const auth = cookies().get("auth-token")?.value;
+  async function getNominees() {
+    const endpoint = "https://cube-academy-api.cubeapis.com/api/nominee";
+    const config = {
+      headers: { Authorization: `Bearer ${auth}` },
+    };
+    try {
+      const response = await axios.get(endpoint, config);
+      return response.data.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  if (auth) nominees = await getNominees();
+
   return (
     <FormWrapper
       imageUrl={"/nominate-img.jpeg"}
@@ -10,7 +28,11 @@ export default function Nominate() {
         "Please select a cube who you feel has done something honourable this month or just all round has a great work ethic."
       }
     >
-      Hello
+      <label className="font-bold uppercase lg:text-[16px] font-poppins ">
+        <span className="text-secondary-pink">* </span>
+        Cube’s Name
+      </label>
+      <CustomSelect options={nominees} placeholder="Select Option" />
     </FormWrapper>
   );
 }

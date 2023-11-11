@@ -31,7 +31,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({
         <p className="font-anonpro text-sm lg:text-[16px]">{description}</p>
       </div>
 
-      <div className="w-full h-full bg-secondary-pink ">{children}</div>
+      <div className="w-full h-full ">{children}</div>
     </div>
   );
 };

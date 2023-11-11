@@ -1,4 +1,4 @@
-import { cn } from "@/utils/utils";
+import { cn } from "@/lib/utils";
 import { IconProps } from "./Logo";
 
 export const PlusIcon: React.FC<IconProps> = ({ className }) => {
