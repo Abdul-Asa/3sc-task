@@ -4,12 +4,12 @@ import { RedirectType, redirect } from "next/navigation";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import StickyDrawer from "@/components/ui/StickyDrawer";
-const isAuthenticated = cookies().get("auth-token");
+
+export default async function Home() {const isAuthenticated = cookies().get("auth-token");
 if (!isAuthenticated) {
   redirect("/register", RedirectType.replace);
 }
 
-export default async function Home() {
   return (
     <div className="relative flex h-full lg:w-[800px] lg:min-h-[500px] lg:max-h-[800px]  w-full flex-col items-center pb-10 justify-evenly gap-6 bg-primary-white">
       <div className="w-full h-full relative ">
