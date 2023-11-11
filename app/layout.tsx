@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 import axios from "axios";
 
 const poppins = Poppins({
-  weight: "400",
+  weight: "700",
   subsets: ["latin"],
   variable: "--font-poppins",
 });

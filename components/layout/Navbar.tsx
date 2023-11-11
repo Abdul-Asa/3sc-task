@@ -27,3 +27,5 @@ export default function Navbar({ nominees }: { nominees?: any }) {
     </nav>
   );
 }
+
+//add types and interface to the components

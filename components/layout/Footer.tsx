@@ -17,7 +17,7 @@ export default function Footer() {
           <div className="flex justify-between w-full flex-col lg:flex-row items-start">
             <div className="flex justify-between flex-col lg:flex-row gap-2 lg:gap-6">
               <div className="pr-3 ">
-                <p className="text-primary-white text-[12px] font-bold uppercase">
+                <p className="text-primary-white text-[12px] font-bold font-poppins uppercase">
                   Bournemouth
                 </p>
                 <p className="text-primary-white text-[12px] font-anonpro ">
@@ -25,7 +25,7 @@ export default function Footer() {
                 </p>
               </div>
               <div className="pr-3 ">
-                <p className="text-primary-white text-[12px] font-bold uppercase">
+                <p className="text-primary-white text-[12px] font-poppins font-bold uppercase">
                   London
                 </p>
                 <p className="text-primary-white text-[12px] font-anonpro ">
@@ -33,7 +33,7 @@ export default function Footer() {
                 </p>
               </div>
               <div className="pr-3 ">
-                <p className="text-primary-white text-[12px] font-bold uppercase">
+                <p className="text-primary-white text-[12px] font-poppins font-bold uppercase">
                   Washington
                 </p>
                 <p className="text-primary-white text-[12px] font-anonpro ">
@@ -41,7 +41,7 @@ export default function Footer() {
                 </p>
               </div>
               <div className="pr-3 ">
-                <p className="text-primary-white text-[12px] font-bold uppercase">
+                <p className="text-primary-white text-[12px] font-poppins font-bold uppercase">
                   Florida
                 </p>
                 <p className="text-primary-white text-[12px] font-anonpro ">

@@ -39,6 +39,9 @@ const config: Config = {
           "var(--gradient-primary, linear-gradient(81deg, #A0FF1F 13.17%, #00ED71 86.83%))",
         "blob-pattern": 'url("/green-blobs.png")',
       },
+      boxShadow: {
+        custom: "0px 2px 10px 0px rgba(26, 26, 25, 0.24)",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],

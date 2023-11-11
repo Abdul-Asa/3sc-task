@@ -4,7 +4,7 @@ export default async function Process() {
   return (
     <div className="relative flex h-full lg:w-[800px] lg:h-[550px]  w-full flex-col items-center justify-center p-10 bg-primary-white">
       Process
-      <Link href={"/overview"}>
+      <Link href={"/vote/overview"}>
         <button>Lets go</button>{" "}
       </Link>
       <div className="fixed lg:hidden inset-x-0 bottom-0 z-10">
