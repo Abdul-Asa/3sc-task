@@ -1,30 +1,31 @@
 "use client";
-
 import { SubmitHandler, FormProvider } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { useAppForm } from "@/lib/hooks/useFormContext";
-import { FormValues } from "@/lib/types";
+import { NominationReq } from "@/lib/types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export default function Provider({ children }: FormProviderProps) {
-  const route = useRouter();
+  const nominationSchema = yup
+    .object({
+      nominee_id: yup.string().required("A nominee must be selected"),
+      reason: yup.string().required("A nominee must be selected"),
+      process: yup.string().required("A nominee must be selected"),
+    })
+    .required();
 
   const methods = useAppForm({
-    name: "",
-    email: "",
-    phone: "",
-    plan: "arcade",
-    billing: "monthly",
-    addons: {
-      online: false,
-      storage: false,
-      profile: false,
+    defaultValues: {
+      nominee_id: "",
+      reason: "",
+      process: "",
     },
+    resolver: yupResolver(nominationSchema),
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const isValid = !!(data.name && data.email && data.phone);
-
-    console.log(isValid);
+  const onSubmit: SubmitHandler<NominationReq> = (data) => {
+    const isValid = !!(data.nominee_id && data.reason && data.process);
+    // console.log(isValid);
     console.log(data);
     //validation
   };

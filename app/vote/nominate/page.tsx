@@ -1,5 +1,5 @@
 import { FormWrapper } from "@/components/form/FormWrapper";
-import CustomSelect from "@/components/ui/CustomSelect";
+import NominateForm from "@/components/ui/NominateForm";
 import axios from "axios";
 import { cookies } from "next/headers";
 
@@ -28,11 +28,7 @@ export default async function Nominate() {
         "Please select a cube who you feel has done something honourable this month or just all round has a great work ethic."
       }
     >
-      <label className="font-bold uppercase lg:text-[16px] font-poppins ">
-        <span className="text-secondary-pink">* </span>
-        Cube’s Name
-      </label>
-      <CustomSelect options={nominees} placeholder="Select Option" />
+      <NominateForm options={nominees} placeholder="Select Option" />
     </FormWrapper>
   );
 }

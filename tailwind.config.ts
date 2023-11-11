@@ -40,7 +40,8 @@ const config: Config = {
         "blob-pattern": 'url("/green-blobs.png")',
       },
       boxShadow: {
-        custom: "0px 2px 10px 0px rgba(26, 26, 25, 0.24)",
+        strong: "0px 2px 10px 0px rgba(26, 26, 25, 0.24)",
+        light: "0px 1px 10px 0px rgba(26, 26, 25, 0.08)",
       },
       keyframes: {
         "accordion-down": {

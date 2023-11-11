@@ -10,3 +10,15 @@ export interface FormValues {
     profile: boolean;
   };
 }
+
+export type NominationReq = {
+  nominee_id?: string;
+  reason?: string;
+  process?: string;
+};
+
+export type NomineeRes = {
+  nominee_id?: string;
+  first_name?: string;
+  last_name?: string;
+}[];

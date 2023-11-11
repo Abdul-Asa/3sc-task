@@ -1,10 +1,21 @@
-import { useForm, useFormContext, DefaultValues } from "react-hook-form";
-import { FormValues } from "../types";
+import {
+  useForm,
+  useFormContext,
+  DefaultValues,
+  Resolver,
+} from "react-hook-form";
+import { NominationReq } from "../types";
 
 export default function useAppFormContext() {
-  return useFormContext<FormValues>();
+  return useFormContext<NominationReq>();
 }
 
-export function useAppForm(defaultValues?: DefaultValues<FormValues>) {
-  return useForm<FormValues>({ defaultValues });
+export function useAppForm({
+  defaultValues,
+  resolver,
+}: {
+  defaultValues?: DefaultValues<NominationReq>;
+  resolver?: Resolver<NominationReq>;
+}) {
+  return useForm<NominationReq>({ defaultValues, resolver });
 }

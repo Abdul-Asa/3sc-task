@@ -1,6 +1,7 @@
 import Provider from "@/components/form/FormProvider";
 import ProgressBar from "@/components/form/ProgressBar";
 
+const lol = 2;
 export default function VoteLayout({
   children,
 }: {

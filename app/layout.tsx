@@ -32,7 +32,7 @@ export default async function RootLayout({
   let nominees = null;
   const auth = cookies().get("auth-token")?.value;
   async function getNominees() {
-    const endpoint = "https://cube-academy-api.cubeapis.com/api/nominee";
+    const endpoint = "https://cube-academy-api.cubeapis.com/api/nomination";
     const config = {
       headers: { Authorization: `Bearer ${auth}` },
     };

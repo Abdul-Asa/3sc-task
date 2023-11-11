@@ -20,7 +20,8 @@ const Button: React.FC<ButtonProps> = ({
   isLink,
   ...props
 }) => {
-  const baseStyles = "px-[17.5px] py-2 uppercase font-poppins h-12 text-sm";
+  const baseStyles =
+    "px-[17.5px] py-2 uppercase font-poppins h-12 text-sm shadow-light";
   const primaryStyles = "bg-primary-black text-primary-white";
   const secondaryStyles =
     "bg-primary-white text-primary-black border-2 border-primary-black";
@@ -29,8 +30,11 @@ const Button: React.FC<ButtonProps> = ({
       "hover:bg-primary-white hover:text-primary-black hover:border-primary-black hover:border-2",
     secondary: "hover:border-primary-pink",
   };
-  const disabledStyles =
-    "disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-200";
+  const disabledStyles = {
+    primary:
+      "disabled:bg-greys-mid disabled:hover:border-greys-mid disabled:hover:text-primary-white",
+    secondary: "disabled:border-greys-mid disabled:text-greys-dark ",
+  };
 
   const buttonContent = (
     <button
@@ -38,7 +42,7 @@ const Button: React.FC<ButtonProps> = ({
         baseStyles,
         variant === "primary" ? primaryStyles : secondaryStyles,
         hoverStyles[variant],
-        disabledStyles,
+        disabledStyles[variant],
         className,
         inDrawer ? "w-full" : "w-60"
       )}

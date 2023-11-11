@@ -24,14 +24,13 @@ const FormWrapper: React.FC<FormWrapperProps> = ({
           alt="Background image"
         />
       </div>
-      <div className="flex gap-4 flex-col w-5/6 py-6">
+      <div className="flex gap-3 flex-col w-5/6 py-3">
         <h1 className=" font-bold uppercase text-lg lg:text-[24px] font-poppins ">
           {heading}
         </h1>
         <p className="font-anonpro text-sm lg:text-[16px]">{description}</p>
       </div>
-
-      <div className="w-full h-full ">{children}</div>
+      {children}
     </div>
   );
 };
