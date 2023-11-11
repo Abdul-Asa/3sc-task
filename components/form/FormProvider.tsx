@@ -2,8 +2,8 @@
 
 import { SubmitHandler, FormProvider } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useAppForm } from "@/utils/hooks/useFormContext";
-import { FormValues } from "@/utils/types";
+import { useAppForm } from "@/lib/hooks/useFormContext";
+import { FormValues } from "@/lib/types";
 
 export default function Provider({ children }: FormProviderProps) {
   const route = useRouter();

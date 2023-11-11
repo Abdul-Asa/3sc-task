@@ -52,7 +52,7 @@ export default async function RootLayout({
       >
         <Navbar nominees={nominees} />
         <main className="relative overflow-hidden flex h-[calc(100vh-72px)] flex-col items-center justify-center lg:px-20 lg:pt-10 lg:pb-20 bg-backdrop-gradient">
-          <div className="relative flex w-full h-full items-center justify-center z-[1]">
+          <div className="relative flex w-full h-full items-center lg:p-4 justify-center z-[1]">
             {children}
           </div>
           <div className="absolute bottom-[-635px] left-[-399px] 2xl:h-full 2xl:w-full 2xl:bottom-0 2xl:left-0  h-[1310px] w-[1839px] bg-blob-pattern bg-no-repeat bg-cover z-0 " />

@@ -11,7 +11,7 @@ if (!isAuthenticated) {
 
 export default async function Home() {
   return (
-    <div className="relative flex h-full lg:w-[800px] lg:h-[550px]  w-full flex-col items-center pb-10 justify-evenly gap-6 bg-primary-white">
+    <div className="relative flex h-full lg:w-[800px] lg:min-h-[500px] lg:max-h-[800px]  w-full flex-col items-center pb-10 justify-evenly gap-6 bg-primary-white">
       <div className="w-full h-full relative ">
         <Image
           src="/3SC-home-image.jpeg"

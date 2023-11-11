@@ -8,7 +8,7 @@ export default function VoteLayout({
 }) {
   return (
     <Provider>
-      <section className="relative flex h-full lg:w-[800px] lg:h-[550px]  w-full flex-col items-center justify-center p-10 bg-primary-white">
+      <section className="relative flex h-full  lg:w-[800px] lg:min-h-[500px] lg:max-h-[800px] w-full flex-col items-center justify-center p-10 bg-primary-white">
         <ProgressBar />
         <div className=" flex h-full w-full">{children}</div>
       </section>

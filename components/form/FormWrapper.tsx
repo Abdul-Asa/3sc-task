@@ -15,16 +15,23 @@ const FormWrapper: React.FC<FormWrapperProps> = ({
   children,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-between h-full w-full ">
-      <Image
-        src={imageUrl}
-        alt="Background"
-        fill
-        className="object-center object-cover h-60 w-full mb-4"
-      />
-      <h2 className="text-2xl font-bold ">{heading}</h2>
-      <p className="">{description}</p>
-      <div className="w-full ">{children}</div>
+    <div className="flex flex-col justify-between h-full pt-6 w-full ">
+      <div className="w-full min-h-[35%] relative ">
+        <Image
+          src={imageUrl}
+          fill
+          className="object-cover object-center"
+          alt="Background image"
+        />
+      </div>
+      <div className="flex gap-4 flex-col w-5/6 py-6">
+        <h1 className=" font-bold uppercase text-lg lg:text-[24px] font-poppins ">
+          {heading}
+        </h1>
+        <p className="font-anonpro text-sm lg:text-[16px]">{description}</p>
+      </div>
+
+      <div className="w-full h-full bg-secondary-pink ">{children}</div>
     </div>
   );
 };
