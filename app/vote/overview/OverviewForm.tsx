@@ -1,26 +1,23 @@
 "use client";
 import { useFormContext } from "react-hook-form";
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
-import { NomineeRes } from "@/lib/types";
 import { radioOptions } from "../process/ProcessForm";
 import StickyDrawer from "@/components/ui/StickyDrawer";
+import { useApp } from "@/lib/hooks/useAppContext";
 
-interface NomineesNameProps {
-  nominees?: NomineeRes;
-}
-
-const OverviewForm: React.FC<NomineesNameProps> = ({ nominees }) => {
+const OverviewForm: React.FC = () => {
   const {
     watch,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitSuccessful },
   } = useFormContext();
   const selectedId = watch("nominee_id");
   const reasonValue = watch("reason");
   const processValue = watch("process");
   const router = useRouter();
+  const { nominees } = useApp();
 
   useEffect(() => {
     if (!selectedId || !reasonValue || !processValue)
@@ -109,7 +106,6 @@ const OverviewForm: React.FC<NomineesNameProps> = ({ nominees }) => {
           <p className="lg:text-sm text-xs font-anonpro">{thoughts}</p>
         </div>
       </div>
-
       <Button
         loading={isSubmitting}
         type="submit"

@@ -13,14 +13,15 @@ import StickyDrawer from "@/components/ui/StickyDrawer";
 import React, { use, useEffect } from "react";
 import { NomineeRes } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { useApp } from "@/lib/hooks/useAppContext";
 
 export interface CustomSelectProps {
   placeholder?: string;
 }
 
 const ReasonForm: React.FC<CustomSelectProps> = ({ placeholder }) => {
-    const router = useRouter();
-const {
+  const router = useRouter();
+  const {
     control,
     watch,
     formState: { errors },
@@ -86,13 +87,10 @@ const {
   );
 };
 
-interface NomineesNameProps {
-  nominees?: NomineeRes;
-}
-
-export const NomineesName: React.FC<NomineesNameProps> = ({ nominees }) => {
+export const NomineesName: React.FC = () => {
   const { watch } = useFormContext();
   const selectedId = watch("nominee_id");
+  const { nominees } = useApp();
   const selectName = nominees?.find(
     (nominee) => nominee.nominee_id === selectedId
   )?.first_name;

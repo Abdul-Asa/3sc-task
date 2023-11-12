@@ -1,15 +1,11 @@
-export interface FormValues {
-  name: string;
-  email: string;
-  phone: string;
-  plan: "arcade" | "advanced" | "pro";
-  billing: "monthly" | "yearly";
-  addons: {
-    online: boolean;
-    storage: boolean;
-    profile: boolean;
-  };
-}
+export type NominationRes = {
+  nomination_id?: string;
+  nominee_id?: string;
+  reason?: string;
+  process?: string;
+  date_submitted?: string;
+  closing_date?: string;
+}[];
 
 export type NominationReq = {
   nominee_id?: string;

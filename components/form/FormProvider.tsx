@@ -6,10 +6,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useApp } from "@/lib/hooks/useAppContext";
 // import { cookies } from "next/headers";
 
-export default function Provider({ children, authToken }: FormProviderProps) {
+export default function Provider({ children }: FormProviderProps) {
   const router = useRouter();
+  const { authToken, setNominations } = useApp();
   const processOptions = [
     "very_unfair",
     "unfair",
@@ -43,7 +45,6 @@ export default function Provider({ children, authToken }: FormProviderProps) {
 
   // const authToken - cookies().get("auth-token")?.value;
   const onSubmit: SubmitHandler<NominationReq> = (data) => {
-    console.log(data);
     return axios
       .post("https://cube-academy-api.cubeapis.com/api/nomination", data, {
         headers: {
@@ -51,10 +52,8 @@ export default function Provider({ children, authToken }: FormProviderProps) {
         },
       })
       .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          console.log("success");
-        }
+        console.log("success");
+        setNominations!((prev) => [...prev, res.data.data]);
         router.push("/submitted");
       })
       .catch((err) => {

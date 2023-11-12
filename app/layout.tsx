@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Poppins, Anonymous_Pro } from "next/font/google";
-
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { cookies } from "next/headers";
 import axios from "axios";
+import { AppProvider } from "@/lib/hooks/useAppContext";
 
 const poppins = Poppins({
   weight: "700",
@@ -30,8 +30,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   let nominees = null;
-  const auth = cookies().get("auth-token")?.value;
-  async function getNominees() {
+  let nominations = null;
+  let auth = cookies().get("auth-token")?.value;
+
+  async function getNomination() {
     const endpoint = "https://cube-academy-api.cubeapis.com/api/nomination";
     const config = {
       headers: { Authorization: `Bearer ${auth}` },
@@ -43,6 +45,20 @@ export default async function RootLayout({
       console.error(error);
     }
   }
+  async function getNominees() {
+    const endpoint = "https://cube-academy-api.cubeapis.com/api/nominee";
+    const config = {
+      headers: { Authorization: `Bearer ${auth}` },
+    };
+    try {
+      const response = await axios.get(endpoint, config);
+      return response.data.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  if (auth) nominations = await getNomination();
   if (auth) nominees = await getNominees();
 
   return (
@@ -50,13 +66,20 @@ export default async function RootLayout({
       <body
         className={`${poppins.variable} ${anon_pro.variable} min-h-screen flex flex-col`}
       >
-        <Navbar nominees={nominees} />
-        <main className="relative overflow-hidden flex h-[calc(100vh-72px)] flex-col items-center justify-center lg:px-20  bg-backdrop-gradient">
-          {children}
-          <div className="absolute bottom-[-635px] left-[-399px] 2xl:h-full 2xl:w-full 2xl:bottom-0 2xl:left-0  h-[1310px] w-[1839px] bg-blob-pattern bg-no-repeat bg-cover z-0 " />
-        </main>
-
-        <Footer />
+        <AppProvider
+          initialValues={{
+            authToken: auth!,
+            nominations: nominations,
+            nominees: nominees,
+          }}
+        >
+          <Navbar />
+          <main className="relative overflow-hidden flex h-[calc(100vh-72px)] flex-col items-center justify-center lg:px-20  bg-backdrop-gradient">
+            {children}
+            <div className="absolute bottom-[-635px] left-[-399px] 2xl:h-full 2xl:w-full 2xl:bottom-0 2xl:left-0  h-[1310px] w-[1839px] bg-blob-pattern bg-no-repeat bg-cover z-0 " />
+          </main>
+          <Footer />
+        </AppProvider>
       </body>
     </html>
   );

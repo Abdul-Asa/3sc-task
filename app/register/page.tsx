@@ -39,7 +39,7 @@ export default async function Register() {
   }
 
   return (
-    <main className="relative flex flex-col items-center justify-center p-10">
+    <main className="relative flex flex-col items-center z-[1] justify-center p-10">
       <div className="flex">
         <form
           action={submitRegister}

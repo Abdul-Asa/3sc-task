@@ -17,15 +17,13 @@ import {
   FormMessage,
 } from "../../../components/ui/form";
 import StickyDrawer from "@/components/ui/StickyDrawer";
+import { useApp } from "@/lib/hooks/useAppContext";
 export interface CustomSelectProps {
-  options: NomineeRes;
   placeholder?: string;
 }
 
-const NominateForm: React.FC<CustomSelectProps> = ({
-  options,
-  placeholder,
-}) => {
+const NominateForm: React.FC<CustomSelectProps> = ({ placeholder }) => {
+  const options = useApp().nominees as NomineeRes;
   const { control, watch } = useFormContext();
 
   const nomineeIdValue = watch("nominee_id");
