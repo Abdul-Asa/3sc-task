@@ -48,3 +48,13 @@ export default async function Home() {
     </div>
   );
 }
+
+//Refactor mmessy code
+//Seperate server actions into seperate files
+//Seperate svg Icons into seperate files
+//add Modals
+//figure out the eventleave thing
+//add a loading spinner
+//mobile view for the form table
+//redesign reegister page
+//restructure file system
