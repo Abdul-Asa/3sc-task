@@ -4,8 +4,12 @@ import { useAppForm } from "@/lib/hooks/useFormContext";
 import { NominationReq } from "@/lib/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+// import { cookies } from "next/headers";
 
-export default function Provider({ children }: FormProviderProps) {
+export default function Provider({ children, authToken }: FormProviderProps) {
+  const router = useRouter();
   const processOptions = [
     "very_unfair",
     "unfair",
@@ -37,18 +41,32 @@ export default function Provider({ children }: FormProviderProps) {
     resolver: yupResolver(nominationSchema),
   });
 
+  // const authToken - cookies().get("auth-token")?.value;
   const onSubmit: SubmitHandler<NominationReq> = (data) => {
-    const isValid = !!(data.nominee_id && data.reason && data.process);
-    // console.log(isValid);
     console.log(data);
-    //validation
+    return axios
+      .post("https://cube-academy-api.cubeapis.com/api/nomination", data, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log("success");
+        }
+        router.push("/submitted");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
-        className="flex w-full h-full items-center justify-center z-[1] lg:py-10"
+        className="flex w-full h-full items-center justify-center z-[1] lg:py-8"
       >
         {children}
       </form>
@@ -58,6 +76,9 @@ export default function Provider({ children }: FormProviderProps) {
 
 interface FormProviderProps {
   children: React.ReactNode;
+  authToken?: string;
 }
 
 //see if you can fix th resolver type warning
+//abstarct all functiosn
+//abdstract all  ui interface props

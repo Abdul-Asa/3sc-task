@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { ReactNode } from "react";
 
@@ -24,7 +25,13 @@ const FormWrapper: React.FC<FormWrapperProps> = ({
           alt="Background image"
         />
       </div>
-      <div className="flex gap-3 px-4 lg:px-0 flex-col w-full lg:w-5/6 py-3">
+      <div
+        className={cn(
+          "flex gap-3 px-4 lg:px-0 flex-col w-full lg:w-5/6 py-3",
+          heading?.toString().includes("overview") &&
+            "lg:w-full text-center items-center pb-2 gap-1"
+        )}
+      >
         <h1 className=" font-bold uppercase lg:text-[24px] font-poppins ">
           {heading}
         </h1>

@@ -1,19 +1,36 @@
-import Link from "next/link";
+import Image from "next/image";
+import Button from "@/components/ui/Button";
+import StickyDrawer from "@/components/ui/StickyDrawer";
 
-export default async function Submitted() {
+export default async function Home() {
   return (
-    <div className="relative flex h-full lg:w-[800px] lg:h-[550px]  w-full flex-col items-center justify-center p-10 bg-primary-white">
-      Submitted
-      <Link href={"/nominations"}>
-        <button>Lets go</button>{" "}
-      </Link>
-      <div className="fixed lg:hidden inset-x-0 bottom-0 z-10">
-        <button className="w-full p-4 bg-primary-green text-white">
-          Button Drawer
-        </button>
+    <div className="relative flex w-full h-full items-center lg:pt-10 lg:pb-20 justify-center z-[1]">
+      <div className="relative flex h-full lg:w-[800px] lg:min-h-[500px] lg:max-h-[800px]  w-full flex-col items-center pb-10 justify-evenly gap-6 bg-primary-white">
+        <div className="w-full h-full relative ">
+          <Image
+            src="/3SC-home-image.jpeg"
+            fill
+            className="object-cover object-center"
+            alt="Person at a schedule board"
+          />
+        </div>
+        <div className="w-full p-6 lg:px-20 mb-32 lg:m-0 py-2 flex flex-col justify-center text-center relative gap-2 lg:gap-6">
+          <h1 className=" font-bold uppercase text-lg lg:text-[32px] font-poppins ">
+            SUBMITTED
+          </h1>
+          <p className="font-anonpro text-sm lg:text-[16px]">
+            Finally you can rest
+          </p>
+        </div>{" "}
+        <Button variant="primary" className="lg:block hidden" isLink={"/"}>
+          Home
+        </Button>
+        <StickyDrawer type="single">
+          <Button variant="primary" inDrawer isLink={"/"}>
+            Home
+          </Button>
+        </StickyDrawer>
       </div>
     </div>
   );
 }
-
-//abstract the components into a separate file

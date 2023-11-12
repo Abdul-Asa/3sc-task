@@ -48,5 +48,3 @@ export default async function Home() {
     </div>
   );
 }
-
-//abstract the components into a separate file

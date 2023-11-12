@@ -17,7 +17,7 @@ import { Slider } from "@/components/ui/slider";
 export interface CustomSelectProps {
   placeholder?: string;
 }
-const radioOptions = [
+export const radioOptions = [
   {
     id: "veryunfair",
     value: "very_unfair",
@@ -168,7 +168,7 @@ const ProcessForm: React.FC<CustomSelectProps> = ({ placeholder }) => {
     const nomineeIdValue = watch("nominee_id");
     const reasonValue = watch("reason");
     if (!nomineeIdValue || !reasonValue) router.push("/vote/nominate");
-  }, [processValue]);
+  }, []);
 
   return (
     <div className="h-full w-full ">

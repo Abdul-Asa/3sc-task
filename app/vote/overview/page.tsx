@@ -1,19 +1,36 @@
-import Link from "next/link";
+import { FormWrapper } from "@/components/form/FormWrapper";
+import OverviewForm from "./OverviewForm";
+import axios from "axios";
+import { cookies } from "next/headers";
 
 export default async function Overview() {
+  let nominees = null;
+  const auth = cookies().get("auth-token")?.value;
+  async function getNominees() {
+    const endpoint = "https://cube-academy-api.cubeapis.com/api/nominee";
+    const config = {
+      headers: { Authorization: `Bearer ${auth}` },
+    };
+    try {
+      const response = await axios.get(endpoint, config);
+      return response.data.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  if (auth) nominees = await getNominees();
+
   return (
-    <div className="relative flex h-full lg:w-[800px] lg:h-[550px]  w-full flex-col items-center justify-center p-10 bg-primary-white">
-      Home
-      <Link href={"/submitted"}>
-        <button>Lets go</button>{" "}
-      </Link>
-      <div className="fixed lg:hidden inset-x-0 bottom-0 z-10">
-        <button className="w-full p-4 bg-primary-green text-white">
-          Button Drawer
-        </button>
-      </div>
-    </div>
+    <FormWrapper
+      imageUrl={"/overview-img.jpeg"}
+      heading={"nomination overview"}
+      description={
+        "Thank you for taking the time to nominate a fellow cube. Please check your answers before submitting."
+      }
+    >
+      <OverviewForm nominees={nominees} />
+    </FormWrapper>
   );
 }
 
-//abstract the components into a separate file
+//abstract the props passed down into a separate file

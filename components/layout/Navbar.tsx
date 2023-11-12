@@ -1,7 +1,33 @@
+"use client";
 import Link from "next/link";
 import { FullLogo, ShortLogo } from "./Logo";
 import { InboxIcon, PlusIcon } from "./Icons";
-export default function Navbar({ nominees }: { nominees?: any }) {
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+export default function Navbar({
+  nominees,
+  authToken,
+}: {
+  nominees?: any;
+  authToken?: string;
+}) {
+  const [nominationsNumber, setNumber] = useState(nominees?.length);
+
+  useEffect(() => {
+    axios
+      .get("https://cube-academy-api.cubeapis.com/api/nominees", {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
+      .then((res) => {
+        setNumber(res.data.data.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <nav className="flex h-[72px] w-full box-border items-center justify-between px-[36px] text-primary-white bg-primary-black">
       <Link href="/">
@@ -15,7 +41,7 @@ export default function Navbar({ nominees }: { nominees?: any }) {
               href={"/nominations"}
               className="hidden lg:inline font-anonpro underline"
             >
-              Your Nominations ({nominees.length})
+              Your Nominations ({nominationsNumber})
             </Link>
             <PlusIcon className="inline lg:hidden" />
             <InboxIcon className="inline lg:hidden" />
