@@ -1,5 +1,5 @@
 import { FormWrapper } from "@/components/form/FormWrapper";
-import NominateForm from "@/components/ui/NominateForm";
+import NominateForm from "@/app/vote/nominate/NominateForm";
 import axios from "axios";
 import { cookies } from "next/headers";
 

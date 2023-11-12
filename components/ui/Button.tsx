@@ -44,7 +44,7 @@ const Button: React.FC<ButtonProps> = ({
         hoverStyles[variant],
         disabledStyles[variant],
         className,
-        inDrawer ? "w-full" : "w-60"
+        !inDrawer && "w-60"
       )}
       disabled={disabled || loading}
       {...props}

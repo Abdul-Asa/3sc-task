@@ -17,5 +17,5 @@ export function useAppForm({
   defaultValues?: DefaultValues<NominationReq>;
   resolver?: Resolver<NominationReq>;
 }) {
-  return useForm<NominationReq>({ defaultValues, resolver });
+  return useForm<NominationReq>({ mode: "onChange", defaultValues, resolver });
 }

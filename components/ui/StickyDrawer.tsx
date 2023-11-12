@@ -14,7 +14,7 @@ const StickyDrawer: React.FC<StickyDrawerProps> = ({ type, children }) => {
   const buttonContainerClasses = cn({
     "flex items-center justify-center": type === "single",
     "flex flex-col items-center space-y-4": type === "vertical",
-    "flex items-center space-x-4": type === "horizontal",
+    "flex items-center justify-between w-full space-x-4": type === "horizontal",
   });
 
   return (

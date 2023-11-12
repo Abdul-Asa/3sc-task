@@ -51,10 +51,8 @@ export default async function RootLayout({
         className={`${poppins.variable} ${anon_pro.variable} min-h-screen flex flex-col`}
       >
         <Navbar nominees={nominees} />
-        <main className="relative overflow-hidden flex h-[calc(100vh-72px)] flex-col items-center justify-center lg:px-20 lg:pt-10 lg:pb-20 bg-backdrop-gradient">
-          <div className="relative flex w-full h-full items-center lg:p-4 justify-center z-[1]">
-            {children}
-          </div>
+        <main className="relative overflow-hidden flex h-[calc(100vh-72px)] flex-col items-center justify-center lg:px-20  bg-backdrop-gradient">
+          {children}
           <div className="absolute bottom-[-635px] left-[-399px] 2xl:h-full 2xl:w-full 2xl:bottom-0 2xl:left-0  h-[1310px] w-[1839px] bg-blob-pattern bg-no-repeat bg-cover z-0 " />
         </main>
 

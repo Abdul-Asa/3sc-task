@@ -1,19 +1,16 @@
-import Link from "next/link";
+import ProcessForm from "./ProcessForm";
+import { FormWrapper } from "@/components/form/FormWrapper";
 
 export default async function Process() {
   return (
-    <div className="relative flex h-full lg:w-[800px] lg:h-[550px]  w-full flex-col items-center justify-center p-10 bg-primary-white">
-      Process
-      <Link href={"/vote/overview"}>
-        <button>Lets go</button>{" "}
-      </Link>
-      <div className="fixed lg:hidden inset-x-0 bottom-0 z-10">
-        <button className="w-full p-4 bg-primary-green text-white">
-          Button Drawer
-        </button>
-      </div>
-    </div>
+    <FormWrapper
+      imageUrl={"/process-img.jpeg"}
+      heading={"IS HOW WE CURRENTLY RUN CUBE OF THE MONTH FAIR?"}
+      description={
+        "As you know, out the nominees chosen, we spin a wheel to pick the cube of the month. What’s your opinion on this method?"
+      }
+    >
+      <ProcessForm />
+    </FormWrapper>
   );
 }
-
-//abstract the components into a separate file

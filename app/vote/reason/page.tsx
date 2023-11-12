@@ -1,19 +1,34 @@
-import Link from "next/link";
+import { FormWrapper } from "@/components/form/FormWrapper";
+import ReasonForm, { NomineesName } from "./ReasonForm";
+import { cookies } from "next/headers";
+import axios from "axios";
 
 export default async function Reason() {
+  let nominees = null;
+  const auth = cookies().get("auth-token")?.value;
+  async function getNominees() {
+    const endpoint = "https://cube-academy-api.cubeapis.com/api/nominee";
+    const config = {
+      headers: { Authorization: `Bearer ${auth}` },
+    };
+    try {
+      const response = await axios.get(endpoint, config);
+      return response.data.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  if (auth) nominees = await getNominees();
+
   return (
-    <div className="relative flex h-full lg:w-[800px] lg:h-[550px]  w-full flex-col items-center justify-center p-10 bg-primary-white">
-      Reason
-      <Link href={"/vote/process"}>
-        <button>Lets go</button>{" "}
-      </Link>
-      <div className="fixed lg:hidden inset-x-0 bottom-0 z-10">
-        <button className="w-full p-4 bg-primary-green text-white">
-          Button Drawer
-        </button>
-      </div>
-    </div>
+    <FormWrapper
+      imageUrl={"/reason-img.jpeg"}
+      heading={<NomineesName nominees={nominees} />}
+      description={
+        "Please let us know why you think this cube deserves the ‘cube of the month’ title 🏆⭐"
+      }
+    >
+      <ReasonForm />
+    </FormWrapper>
   );
 }
-
-//abstract the components into a separate file
