@@ -40,7 +40,12 @@ export default function Navbar() {
               Your Nominations ({nominations.length})
             </Link>
             <PlusIcon className="inline lg:hidden" />
-            <InboxIcon className="inline lg:hidden" />
+            <span className="z-[1] bg-transparent relative inline lg:hidden">
+              <InboxIcon />
+              <span className="absolute -top-2 -right-4 flex items-center justify-center bg-primary-pink rounded-full w-5 h-5 text-[9px] z-[-1] text-primary-white">
+                {nominations.length}
+              </span>
+            </span>
           </>
         ) : (
           <button>Sign up</button>
