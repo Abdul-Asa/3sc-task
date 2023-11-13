@@ -1,29 +1,30 @@
 import CustomTable from "./Table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default async function Nominations() {
+  const today = new Date();
   return (
-    <div className="relative  w-full h-full mx-auto p-8 items-center justify-center  z-[1] ">
+    <div className="relative  w-full h-full mx-auto lg:p-8 pt-8 items-center justify-center  z-[1] ">
+      <ToastContainer />
       <div className=" flex flex-col h-full justify-start">
-        <h1 className="text-[32px] font-poppins mb-2 text-primary-black">
+        <h1 className="lg:text-[32px] pl-3 lg:pl-0 text-lg font-poppins mb-2 text-primary-black">
           Your Nominations
         </h1>
         <Tabs
           defaultValue="current"
-          className="py-4 flex flex-col items-start h-full "
+          className="lg:py-4 flex flex-col items-start h-full "
         >
-          <TabsList className="gap-4 mb-3">
+          <TabsList className="gap-4 pl-3 lg:pl-0 mb-3">
             <TabsTrigger value="current">Current</TabsTrigger>
             <TabsTrigger value="closed">Closed</TabsTrigger>
           </TabsList>
           <TabsContent value="current">
-            <div className="">
-              <CustomTable />
-            </div>
+            <CustomTable today={today} type="current" />
           </TabsContent>
           <TabsContent value="closed">
-            {/* <CustomTable /> */}
-            No closed nominations
+            <CustomTable today={today} type="closed" />
           </TabsContent>
         </Tabs>
       </div>

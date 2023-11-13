@@ -7,9 +7,13 @@ import * as yup from "yup";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/hooks/useAppContext";
+import { ToastContainer, toast } from "react-toastify";
+
 // import { cookies } from "next/headers";
 
 export default function Provider({ children }: FormProviderProps) {
+  const notify = () => toast("Error with submission, Try again later");
+
   const router = useRouter();
   const { authToken, setNominations } = useApp();
   const processOptions = [
@@ -55,6 +59,9 @@ export default function Provider({ children }: FormProviderProps) {
         console.log("success");
         setNominations!((prev) => [...prev, res.data.data]);
         router.push("/submitted");
+        if (res.status !== 200) {
+          notify();
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -69,6 +76,7 @@ export default function Provider({ children }: FormProviderProps) {
       >
         {children}
       </form>
+      <ToastContainer />
     </FormProvider>
   );
 }

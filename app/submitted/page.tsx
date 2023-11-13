@@ -35,10 +35,10 @@ export default async function Home() {
             View nominations
           </Button>
         </div>
-        <StickyDrawer type="single">
+        <StickyDrawer type="horizontal">
           <Button
             variant="secondary"
-            className="lg:block hidden"
+            className="lg:hidden block text-sm"
             inDrawer
             isLink={"/"}
           >
@@ -46,7 +46,7 @@ export default async function Home() {
           </Button>
           <Button
             variant="secondary"
-            className="lg:block hidden"
+            className="lg:hidden block text-sm"
             inDrawer
             isLink={"/nominations"}
           >
