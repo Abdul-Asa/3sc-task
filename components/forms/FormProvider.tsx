@@ -4,15 +4,15 @@ import { useAppForm } from "@/lib/hooks/useFormContext";
 import { NominationReq } from "@/lib/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/hooks/useAppContext";
-import { ToastContainer } from "react-toastify";
-import { createNomination } from "@/lib/server-actions";
+import { ToastContainer, toast } from "react-toastify";
 import { processOptions } from "@/lib/constants";
 
 export default function Provider({ children }: FormProviderProps) {
   const router = useRouter();
-  const { setNominations } = useApp();
+  const { authToken, setNominations } = useApp();
 
   const nominationSchema = yup
     .object<NominationReq>({
@@ -38,12 +38,17 @@ export default function Provider({ children }: FormProviderProps) {
   });
 
   const onSubmit: SubmitHandler<NominationReq> = (data) => {
-    return createNomination(data)
+    return axios
+      .post("https://cube-academy-api.cubeapis.com/api/nomination", data, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
       .then((res) => {
         console.log("success");
-        setNominations!((prev) => [...prev, res?.data.data]);
+        setNominations!((prev) => [...prev, res.data.data]);
         router.push("/submitted");
-        if (res?.status !== 200) {
+        if (res.status !== 200) {
           console.log(res);
         }
       })

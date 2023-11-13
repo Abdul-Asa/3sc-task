@@ -1,7 +1,6 @@
 "use client";
 import { CustomFormProps, NomineeRes } from "@/lib/types";
 import { useFormContext } from "react-hook-form";
-import { Button } from "../ui/button";
 import {
   Select,
   SelectContent,
@@ -18,6 +17,7 @@ import {
 } from "../ui/form";
 import StickyDrawer from "@/components/ui/sticky-drawer";
 import { useApp } from "@/lib/hooks/useAppContext";
+import { Button } from "../ui/button";
 
 const NominateForm: React.FC<CustomFormProps> = ({ placeholder }) => {
   const options = useApp().nominees as NomineeRes;
