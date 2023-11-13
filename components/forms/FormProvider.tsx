@@ -13,7 +13,7 @@ import { createNomination } from "@/lib/server-actions";
 
 export default function Provider({ children }: FormProviderProps) {
   const router = useRouter();
-  const { authToken, setNominations } = useApp();
+  const { setNominations, authToken } = useApp();
 
   const nominationSchema = yup
     .object<NominationReq>({
@@ -40,7 +40,11 @@ export default function Provider({ children }: FormProviderProps) {
 
   const onSubmit: SubmitHandler<NominationReq> = (data) => {
     return axios
-      .post("https://cube-academy-api.cubeapis.com/api/nomination", data)
+      .post("https://cube-academy-api.cubeapis.com/api/nomination", data, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
       .then((res) => {
         console.log("success");
         setNominations!((prev) => [...prev, res?.data.data]);
