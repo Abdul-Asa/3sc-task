@@ -19,7 +19,7 @@ import {
   subtractArrays,
 } from "@/lib/utils";
 import { deleteNomination } from "@/lib/server-actions";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import Modal from "@/components/ui/modal";
 import axios from "axios";
 
