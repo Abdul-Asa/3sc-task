@@ -4,25 +4,15 @@ import { useAppForm } from "@/lib/hooks/useFormContext";
 import { NominationReq } from "@/lib/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/hooks/useAppContext";
-import { ToastContainer, toast } from "react-toastify";
-
-// import { cookies } from "next/headers";
+import { ToastContainer } from "react-toastify";
+import { createNomination } from "@/lib/server-actions";
+import { processOptions } from "@/lib/constants";
 
 export default function Provider({ children }: FormProviderProps) {
-  const notify = () => toast("Error with submission, Try again later");
-
   const router = useRouter();
-  const { authToken, setNominations } = useApp();
-  const processOptions = [
-    "very_unfair",
-    "unfair",
-    "not_sure",
-    "fair",
-    "very_fair",
-  ];
+  const { setNominations } = useApp();
 
   const nominationSchema = yup
     .object<NominationReq>({
@@ -47,20 +37,14 @@ export default function Provider({ children }: FormProviderProps) {
     resolver: yupResolver(nominationSchema),
   });
 
-  // const authToken - cookies().get("auth-token")?.value;
   const onSubmit: SubmitHandler<NominationReq> = (data) => {
-    return axios
-      .post("https://cube-academy-api.cubeapis.com/api/nomination", data, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
+    return createNomination(data)
       .then((res) => {
         console.log("success");
-        setNominations!((prev) => [...prev, res.data.data]);
+        setNominations!((prev) => [...prev, res?.data.data]);
         router.push("/submitted");
-        if (res.status !== 200) {
-          notify();
+        if (res?.status !== 200) {
+          console.log(res);
         }
       })
       .catch((err) => {

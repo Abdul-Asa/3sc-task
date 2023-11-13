@@ -1,17 +1,16 @@
 "use client";
 import { useFormContext } from "react-hook-form";
-import Button from "../../../components/ui/Button";
+import Button from "../ui/button";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../components/ui/form";
+} from "../ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import StickyDrawer from "@/components/ui/StickyDrawer";
-import React, { use, useEffect } from "react";
-import { NomineeRes } from "@/lib/types";
+import StickyDrawer from "@/components/ui/sticky-drawer";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/hooks/useAppContext";
 

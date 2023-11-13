@@ -1,5 +1,5 @@
-import Provider from "@/components/form/FormProvider";
-import ProgressBar from "@/components/form/ProgressBar";
+import Provider from "@/components/forms/FormProvider";
+import ProgressBar from "@/components/forms/ProgressBar";
 import { cookies } from "next/headers";
 
 export default function VoteLayout({

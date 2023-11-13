@@ -1,4 +1,4 @@
-import CustomTable from "./Table";
+import CustomTable from "./custom-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

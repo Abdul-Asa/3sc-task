@@ -2,8 +2,6 @@
 import Link from "next/link";
 import { FullLogo, ShortLogo } from "./Logo";
 import { InboxIcon, PlusIcon } from "./Icons";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { useApp } from "@/lib/hooks/useAppContext";
 
 export default function Navbar() {

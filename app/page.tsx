@@ -2,8 +2,8 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
 import Image from "next/image";
-import Button from "@/components/ui/Button";
-import StickyDrawer from "@/components/ui/StickyDrawer";
+import Button from "@/components/ui/button";
+import StickyDrawer from "@/components/ui/sticky-drawer";
 
 export default async function Home() {
   const isAuthenticated = cookies().get("auth-token");
@@ -50,11 +50,11 @@ export default async function Home() {
 }
 
 //Refactor mmessy code
-//Seperate server actions into seperate files
 //Seperate svg Icons into seperate files
+//add a loading spinner
+//restructure file system
+
 //add Modals
 //figure out the eventleave thing
-//add a loading spinner
-//mobile view for the form table
+//Seperate server actions into seperate files
 //redesign reegister page
-//restructure file system

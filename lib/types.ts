@@ -18,3 +18,7 @@ export type NomineeRes = {
   first_name?: string;
   last_name?: string;
 }[];
+
+export interface CustomFormProps {
+  placeholder?: string;
+}

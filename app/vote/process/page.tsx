@@ -1,5 +1,5 @@
-import ProcessForm from "./ProcessForm";
-import { FormWrapper } from "@/components/form/FormWrapper";
+import { FormWrapper } from "@/components/forms/FormWrapper";
+import ProcessForm from "@/components/forms/ProcessForm";
 
 export default async function Process() {
   return (

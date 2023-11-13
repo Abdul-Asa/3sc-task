@@ -1,5 +1,5 @@
-import { FormWrapper } from "@/components/form/FormWrapper";
-import ReasonForm, { NomineesName } from "./ReasonForm";
+import { FormWrapper } from "@/components/forms/FormWrapper";
+import ReasonForm, { NomineesName } from "@/components/forms/ReasonForm";
 
 export default async function Reason() {
   return (

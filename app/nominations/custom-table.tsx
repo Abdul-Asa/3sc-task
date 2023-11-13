@@ -1,6 +1,6 @@
 "use client";
 import { useApp } from "@/lib/hooks/useAppContext";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,11 +9,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { NominationRes, NomineeRes } from "@/lib/types";
-import axios from "axios";
 import { toast } from "react-toastify";
-import Button from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+import {
+  cn,
+  formatDate,
+  formatProcess,
+  getFullName,
+  parseDate,
+  subtractArrays,
+} from "@/lib/utils";
+import Button from "@/components/ui/button";
+import { deleteNomination } from "@/lib/server-actions";
 
 type CustomTableProps = {
   today: Date;
@@ -21,24 +27,14 @@ type CustomTableProps = {
 };
 
 const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
-  const { nominations, nominees, authToken, setNominations } = useApp();
-
-  function parseDate(dateStr: string) {
-    const [year, month, day] = dateStr.split("-").map(Number);
-    return new Date(year, month - 1, day);
-  }
+  const { nominations, nominees, setNominations } = useApp();
+  const [openModal, setOpenModal] = useState(false);
 
   const closedList = nominations.filter((nomination) => {
     const closingDate = parseDate(nomination.closing_date!);
     today.setHours(0, 0, 0, 0);
     return closingDate < today;
   });
-
-  function subtractArrays(array1: NominationRes, array2: NominationRes) {
-    return array1.filter((obj1) => {
-      return !array2.some((obj2) => obj1.nomination_id === obj2.nomination_id);
-    });
-  }
 
   const notify = () => toast("Nomination deleted successfully");
 
@@ -48,12 +44,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
 
   const handleDelete = (id: string) => {
     console.log(`Delete: ${id}`);
-    axios
-      .delete(`https://cube-academy-api.cubeapis.com/api/nomination/${id}`, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
+    deleteNomination(id)
       .then((res: any) => {
         console.log("success", res);
         notify();
@@ -66,25 +57,26 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
       });
   };
 
-  const getFullName = (nominees: NomineeRes, nominee_id: string) => {
-    const firstname = nominees.find(
-      (nominee) => nominee.nominee_id === nominee_id
-    )?.first_name;
-    const lastname = nominees.find(
-      (nominee) => nominee.nominee_id === nominee_id
-    )?.last_name;
-    return [firstname, lastname].join(" ");
-  };
-
-  const formatDate = (dateString: string) => {
-    const [year, month, day] = dateString.split("-");
-    return `${day}/${month}/${year.slice(-2)}`; // returns "DD/MM/YY"
-  };
-
-  const formatProcess = (processString: string) => {
-    return processString
-      .replace("_", " ")
-      .replace(/\b\w/g, (char) => char.toUpperCase()); // returns "Very Fair" for "very_fair"
+  const DeleteNomination = () => {
+    return (
+      <button disabled={type == "closed"} onClick={() => setOpenModal(true)}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+        >
+          <path
+            d="M13.3333 5.00008V4.33341C13.3333 3.39999 13.3333 2.93328 13.1517 2.57676C12.9919 2.26316 12.7369 2.00819 12.4233 1.8484C12.0668 1.66675 11.6001 1.66675 10.6667 1.66675H9.33333C8.39991 1.66675 7.9332 1.66675 7.57668 1.8484C7.26308 2.00819 7.00811 2.26316 6.84832 2.57676C6.66667 2.93328 6.66667 3.39999 6.66667 4.33341V5.00008M8.33333 9.58342V13.7501M11.6667 9.58342V13.7501M2.5 5.00008H17.5M15.8333 5.00008V14.3334C15.8333 15.7335 15.8333 16.4336 15.5608 16.9684C15.3212 17.4388 14.9387 17.8212 14.4683 18.0609C13.9335 18.3334 13.2335 18.3334 11.8333 18.3334H8.16667C6.76654 18.3334 6.06647 18.3334 5.53169 18.0609C5.06129 17.8212 4.67883 17.4388 4.43915 16.9684C4.16667 16.4336 4.16667 15.7335 4.16667 14.3334V5.00008"
+            stroke="black"
+            strokeWidth="1.66667"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+    );
   };
 
   return (
@@ -109,6 +101,9 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
               type == "closed" && "text-greys-dark disabled"
             )}
           >
+            {type === "closed" && closedList.length === 0 && (
+              <ClosedNominations />
+            )}
             {(type === "closed"
               ? closedList
               : subtractArrays(nominations, closedList)
@@ -138,26 +133,8 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
                   </p>
                 </TableCell>
                 <TableCell className="max-w-[120px] gap-4 flex">
-                  <button
-                    disabled={type == "closed"}
-                    onClick={() => handleDelete(nomination.nomination_id!)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                    >
-                      <path
-                        d="M13.3333 5.00008V4.33341C13.3333 3.39999 13.3333 2.93328 13.1517 2.57676C12.9919 2.26316 12.7369 2.00819 12.4233 1.8484C12.0668 1.66675 11.6001 1.66675 10.6667 1.66675H9.33333C8.39991 1.66675 7.9332 1.66675 7.57668 1.8484C7.26308 2.00819 7.00811 2.26316 6.84832 2.57676C6.66667 2.93328 6.66667 3.39999 6.66667 4.33341V5.00008M8.33333 9.58342V13.7501M11.6667 9.58342V13.7501M2.5 5.00008H17.5M15.8333 5.00008V14.3334C15.8333 15.7335 15.8333 16.4336 15.5608 16.9684C15.3212 17.4388 14.9387 17.8212 14.4683 18.0609C13.9335 18.3334 13.2335 18.3334 11.8333 18.3334H8.16667C6.76654 18.3334 6.06647 18.3334 5.53169 18.0609C5.06129 17.8212 4.67883 17.4388 4.43915 16.9684C4.16667 16.4336 4.16667 15.7335 4.16667 14.3334V5.00008"
-                        stroke="black"
-                        strokeWidth="1.66667"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
+                  <DeleteNomination />
+
                   <button
                     disabled={type == "closed"}
                     onClick={() => handleEdit(nomination.nomination_id!)}
@@ -183,6 +160,17 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
             ))}
           </TableBody>
         </Table>
+      )}
+      {openModal && (
+        <>
+          <div
+            className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+            id="my-modal"
+          ></div>
+          <div className="absolute inset-x-0 bottom-0 p-4 bg-white shadow-md sm:rounded-lg sm:m-4 sm:fixed sm:inset-auto">
+            <button onClick={() => setOpenModal(false)}>Close Modal</button>
+          </div>
+        </>
       )}
     </>
   );
@@ -240,24 +228,3 @@ const ClosedNominations = () => {
     </div>
   );
 };
-
-// const [filteredData, setFilteredData] = useState(nominations);
-// function parseDate(dateStr: string) {
-//   const [year, month, day] = dateStr.split("-").map(Number);
-//   return new Date(year, month - 1, day);
-// }
-
-// useEffect(() => {
-//   setFilteredData(
-//     nominations.filter((nomination) => {
-//       const closingDate = parseDate(nomination.closing_date!);
-//       today.setHours(0, 0, 0, 0);
-//       if (type === "closed") {
-//         return closingDate < today;
-//       }
-//       return closingDate >= today;
-//     })
-//   );
-// }, [nominations, type, today, nominations.length]);
-
-// const notify = () => toast("Nomination deleted successfully");

@@ -4,8 +4,8 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { cookies } from "next/headers";
-import axios from "axios";
 import { AppProvider } from "@/lib/hooks/useAppContext";
+import { getNomination, getNominees } from "@/lib/server-actions";
 
 const poppins = Poppins({
   weight: "700",
@@ -32,31 +32,6 @@ export default async function RootLayout({
   let nominees = null;
   let nominations = null;
   let auth = cookies().get("auth-token")?.value;
-
-  async function getNomination() {
-    const endpoint = "https://cube-academy-api.cubeapis.com/api/nomination";
-    const config = {
-      headers: { Authorization: `Bearer ${auth}` },
-    };
-    try {
-      const response = await axios.get(endpoint, config);
-      return response.data.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  async function getNominees() {
-    const endpoint = "https://cube-academy-api.cubeapis.com/api/nominee";
-    const config = {
-      headers: { Authorization: `Bearer ${auth}` },
-    };
-    try {
-      const response = await axios.get(endpoint, config);
-      return response.data.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   if (auth) nominations = await getNomination();
   if (auth) nominees = await getNominees();

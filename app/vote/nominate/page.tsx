@@ -1,7 +1,5 @@
-import { FormWrapper } from "@/components/form/FormWrapper";
-import NominateForm from "@/app/vote/nominate/NominateForm";
-import axios from "axios";
-import { cookies } from "next/headers";
+import { FormWrapper } from "@/components/forms/FormWrapper";
+import NominateForm from "@/components/forms/NominateForm";
 
 export default async function Nominate() {
   return (
@@ -16,5 +14,3 @@ export default async function Nominate() {
     </FormWrapper>
   );
 }
-
-//abstract the props passed down into a separate file

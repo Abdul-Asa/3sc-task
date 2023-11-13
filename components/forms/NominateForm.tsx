@@ -1,28 +1,25 @@
 "use client";
-import { NomineeRes } from "@/lib/types";
+import { CustomFormProps, NomineeRes } from "@/lib/types";
 import { useFormContext } from "react-hook-form";
-import Button from "../../../components/ui/Button";
+import Button from "../ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../components/ui/select";
+} from "../ui/select";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../components/ui/form";
-import StickyDrawer from "@/components/ui/StickyDrawer";
+} from "../ui/form";
+import StickyDrawer from "@/components/ui/sticky-drawer";
 import { useApp } from "@/lib/hooks/useAppContext";
-export interface CustomSelectProps {
-  placeholder?: string;
-}
 
-const NominateForm: React.FC<CustomSelectProps> = ({ placeholder }) => {
+const NominateForm: React.FC<CustomFormProps> = ({ placeholder }) => {
   const options = useApp().nominees as NomineeRes;
   const { control, watch } = useFormContext();
 
