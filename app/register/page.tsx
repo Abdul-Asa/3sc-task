@@ -2,7 +2,7 @@ import { submitRegister, submitLogin } from "@/lib/server-actions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cookies } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 export default async function Register() {
   const isAuthenticated = cookies().get("auth-token");

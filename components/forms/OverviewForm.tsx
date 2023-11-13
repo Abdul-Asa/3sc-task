@@ -2,7 +2,7 @@
 import { useFormContext } from "react-hook-form";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { radioOptions } from "@/lib/constants";
 import StickyDrawer from "@/components/ui/sticky-drawer";

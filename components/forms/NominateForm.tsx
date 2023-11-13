@@ -1,7 +1,7 @@
 "use client";
 import { CustomFormProps, NomineeRes } from "@/lib/types";
 import { useFormContext } from "react-hook-form";
-import Button from "../ui/button";
+import { Button } from "../ui/button";
 import {
   Select,
   SelectContent,

@@ -18,8 +18,8 @@ import {
   parseDate,
   subtractArrays,
 } from "@/lib/utils";
-import Button from "@/components/ui/button";
 import { deleteNomination } from "@/lib/server-actions";
+import { Button } from "@/components/ui/button";
 
 type CustomTableProps = {
   today: Date;

@@ -56,6 +56,6 @@ const Button: React.FC<ButtonProps> = ({
   return isLink ? <Link href={isLink}>{buttonContent}</Link> : buttonContent;
 };
 
-export default Button;
+export { Button };
 
 //fix disabled and loading types later

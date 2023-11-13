@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import StickyDrawer from "@/components/ui/sticky-drawer";
 
 export default async function Home() {
