@@ -29,6 +29,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  //turn this into a custom hook
   let nominees = null;
   let nominations = null;
   let auth = cookies().get("auth-token")?.value;

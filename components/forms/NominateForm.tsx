@@ -17,7 +17,7 @@ import {
 } from "../ui/form";
 import StickyDrawer from "@/components/ui/sticky-drawer";
 import { useApp } from "@/lib/hooks/useAppContext";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/button";
 
 const NominateForm: React.FC<CustomFormProps> = ({ placeholder }) => {
   const options = useApp().nominees as NomineeRes;

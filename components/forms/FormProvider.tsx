@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/hooks/useAppContext";
 import { ToastContainer, toast } from "react-toastify";
 import { processOptions } from "@/lib/constants";
+import { createNomination } from "@/lib/server-actions";
 
 export default function Provider({ children }: FormProviderProps) {
   const router = useRouter();
@@ -39,16 +40,12 @@ export default function Provider({ children }: FormProviderProps) {
 
   const onSubmit: SubmitHandler<NominationReq> = (data) => {
     return axios
-      .post("https://cube-academy-api.cubeapis.com/api/nomination", data, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
+      .post("https://cube-academy-api.cubeapis.com/api/nomination", data)
       .then((res) => {
         console.log("success");
-        setNominations!((prev) => [...prev, res.data.data]);
+        setNominations!((prev) => [...prev, res?.data.data]);
         router.push("/submitted");
-        if (res.status !== 200) {
+        if (res?.status !== 200) {
           console.log(res);
         }
       })

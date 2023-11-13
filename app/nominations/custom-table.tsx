@@ -20,6 +20,8 @@ import {
 } from "@/lib/utils";
 import { deleteNomination } from "@/lib/server-actions";
 import { Button } from "@/components/ui/Button";
+import Modal from "@/components/ui/modal";
+import axios from "axios";
 
 type CustomTableProps = {
   today: Date;
@@ -27,8 +29,15 @@ type CustomTableProps = {
 };
 
 const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
-  const { nominations, nominees, setNominations } = useApp();
-  const [openModal, setOpenModal] = useState(false);
+  const { nominations, nominees, setNominations, authToken } = useApp();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
+
+  const openModal = (id: string) => {
+    setSelectedId(id);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => setIsModalOpen(false);
 
   const closedList = nominations.filter((nomination) => {
     const closingDate = parseDate(nomination.closing_date!);
@@ -37,29 +46,37 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
   });
 
   const notify = () => toast("Nomination deleted successfully");
+  const notifyEdit = () => toast("Edit Action not yet available");
 
   const handleEdit = (id: string) => {
     console.log(`Edit: ${id}`);
+    notifyEdit();
   };
 
   const handleDelete = (id: string) => {
     console.log(`Delete: ${id}`);
-    deleteNomination(id)
+    axios
+      .delete("https://cube-academy-api.cubeapis.com/api/nomination/" + id, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
       .then((res: any) => {
         console.log("success", res);
         notify();
         setNominations!(
           nominations.filter((nomination) => nomination.nomination_id !== id)
         );
+        closeModal();
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const DeleteNomination = () => {
+  const DeleteNomination = ({ id }: { id: string }) => {
     return (
-      <button disabled={type == "closed"} onClick={() => setOpenModal(true)}>
+      <button disabled={type == "closed"} onClick={() => openModal(id)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -133,8 +150,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
                   </p>
                 </TableCell>
                 <TableCell className="max-w-[120px] gap-4 flex">
-                  <DeleteNomination />
-
+                  <DeleteNomination id={nomination.nomination_id!} />
                   <button
                     disabled={type == "closed"}
                     onClick={() => handleEdit(nomination.nomination_id!)}
@@ -155,23 +171,41 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
                       />
                     </svg>
                   </button>
-                </TableCell>
+                </TableCell>{" "}
               </TableRow>
             ))}
           </TableBody>
         </Table>
       )}
-      {openModal && (
-        <>
-          <div
-            className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
-            id="my-modal"
-          ></div>
-          <div className="absolute inset-x-0 bottom-0 p-4 bg-white shadow-md sm:rounded-lg sm:m-4 sm:fixed sm:inset-auto">
-            <button onClick={() => setOpenModal(false)}>Close Modal</button>
-          </div>
-        </>
-      )}
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <div className="flex flex-col gap-4 p-8">
+          <h1 className="font-poppins uppercase text-lg">
+            Delete this nomination?
+          </h1>
+          <p className="font-anonpro">
+            If you delete this nomination, the nominee will no longer be put
+            forward by you.
+          </p>
+        </div>
+        <div className="flex flex-col h-full w-full p-6 gap-4 shadow-light">
+          <Button
+            variant="secondary"
+            inDrawer
+            className="w-full"
+            onClick={() => handleDelete(selectedId)}
+          >
+            Yes, Delete
+          </Button>
+          <Button
+            variant="secondary"
+            inDrawer
+            className="w-full"
+            onClick={closeModal}
+          >
+            Cancel
+          </Button>
+        </div>
+      </Modal>
     </>
   );
 };

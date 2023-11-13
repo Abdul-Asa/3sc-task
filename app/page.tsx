@@ -2,8 +2,8 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
 import StickyDrawer from "@/components/ui/sticky-drawer";
+import { Button } from "@/components/ui/Button";
 
 export default async function Home() {
   const isAuthenticated = cookies().get("auth-token");

@@ -5,7 +5,6 @@ import { redirect, RedirectType } from "next/navigation";
 import { NominationReq } from "./types";
 
 const baseUrl = "https://cube-academy-api.cubeapis.com";
-let auth = cookies().get("auth-token")?.value;
 
 export async function submitLogin(formData: FormData) {
   const endpoint = `${baseUrl}/api/login`;
@@ -38,6 +37,8 @@ export async function submitRegister(formData: FormData) {
 }
 
 export async function getNomination() {
+  let auth = cookies().get("auth-token")?.value;
+
   const endpoint = `${baseUrl}/api/nomination`;
   const config = {
     headers: { Authorization: `Bearer ${auth}` },
@@ -51,6 +52,8 @@ export async function getNomination() {
 }
 
 export async function getNominees() {
+  let auth = cookies().get("auth-token")?.value;
+
   const endpoint = `${baseUrl}/api/nominee`;
   const config = {
     headers: { Authorization: `Bearer ${auth}` },
@@ -64,6 +67,8 @@ export async function getNominees() {
 }
 
 export async function createNomination(data: NominationReq) {
+  let auth = cookies().get("auth-token")?.value;
+
   const endpoint = `${baseUrl}/api/nomination`;
   const config = {
     headers: { Authorization: `Bearer ${auth}` },
@@ -76,6 +81,9 @@ export async function createNomination(data: NominationReq) {
 }
 
 export async function deleteNomination(id: string) {
+  let auth = cookies().get("auth-token")?.value;
+  console.log(id);
+  console.log(auth);
   const endpoint = `${baseUrl}/api/nomination/${id}`;
   const config = {
     headers: { Authorization: `Bearer ${auth}` },

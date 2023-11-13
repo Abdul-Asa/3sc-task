@@ -1,15 +1,5 @@
-import {
-  useForm,
-  useFormContext,
-  DefaultValues,
-  Resolver,
-} from "react-hook-form";
+import { useForm, DefaultValues, Resolver } from "react-hook-form";
 import { NominationReq } from "../types";
-import { createContext } from "react";
-
-export default function useAppFormContext() {
-  return useFormContext<NominationReq>();
-}
 
 export function useAppForm({
   defaultValues,
@@ -20,3 +10,5 @@ export function useAppForm({
 }) {
   return useForm<NominationReq>({ mode: "onChange", defaultValues, resolver });
 }
+
+//remove indirection
