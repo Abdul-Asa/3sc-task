@@ -18,11 +18,9 @@ import {
   parseDate,
   subtractArrays,
 } from "@/lib/utils";
-import { deleteNomination } from "@/lib/server-actions";
 import { Button } from "@/components/ui/button";
 import Modal from "@/components/ui/modal";
 import axios from "axios";
-import { Stick } from "next/font/google";
 import StickyDrawer from "@/components/ui/sticky-drawer";
 
 type CustomTableProps = {
@@ -100,10 +98,6 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
 
   return (
     <>
-      {/* {type === "closed" && closedList.length === 0 && <ClosedNominations />}
-      {type === "current" ? (
-        subtractArrays(nominations, closedList).length === 0 && <EmptyState />
-      ) : ( */}
       {type === "closed" && closedList.length === 0 && <ClosedNominations />}
       {type === "current" &&
         subtractArrays(nominations, closedList).length === 0 && <EmptyState />}

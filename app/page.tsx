@@ -49,7 +49,7 @@ export default async function Home() {
   );
 }
 
-//add Modals
-//figure out the eventleave thing
+//TODO
 //add Meta data
 //seperate svg icons into Icon file
+//break down custom table
