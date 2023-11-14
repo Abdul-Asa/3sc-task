@@ -1,15 +1,13 @@
 import CustomTable from "./custom-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default async function Nominations() {
   const today = new Date();
   return (
     <div className="relative  w-full h-full mx-auto lg:p-8 pt-8 items-center justify-center  z-[1] ">
-      <ToastContainer />
       <div className=" flex flex-col h-full justify-start">
-        <h1 className="lg:text-[32px] pl-3 lg:pl-0 text-lg font-poppins mb-2 text-primary-black">
+        <h1 className="lg:text-[32px] pl-3 lg:pl-0 text-lg uppercase font-poppins mb-2 text-primary-black">
           Your Nominations
         </h1>
         <Tabs

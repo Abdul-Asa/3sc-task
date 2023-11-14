@@ -1,22 +1,24 @@
 "use client";
-import { SubmitHandler, FormProvider } from "react-hook-form";
-import { useAppForm } from "@/lib/hooks/useFormContext";
+import {
+  SubmitHandler,
+  FormProvider,
+  useForm,
+  Resolver,
+} from "react-hook-form";
 import { NominationReq } from "@/lib/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/hooks/useAppContext";
-import { ToastContainer, toast } from "react-toastify";
 import { processOptions } from "@/lib/constants";
-import { createNomination } from "@/lib/server-actions";
 
 export default function Provider({ children }: FormProviderProps) {
   const router = useRouter();
   const { setNominations, authToken } = useApp();
 
   const nominationSchema = yup
-    .object<NominationReq>({
+    .object({
       nominee_id: yup.string().required("A nominee must be selected"),
       reason: yup
         .string()
@@ -29,13 +31,14 @@ export default function Provider({ children }: FormProviderProps) {
     })
     .required();
 
-  const methods = useAppForm({
+  const methods = useForm<NominationReq>({
+    mode: "onChange",
     defaultValues: {
       nominee_id: "",
       reason: "",
       process: "",
     },
-    resolver: yupResolver(nominationSchema),
+    resolver: yupResolver<NominationReq>(nominationSchema),
   });
 
   const onSubmit: SubmitHandler<NominationReq> = (data) => {
@@ -47,7 +50,7 @@ export default function Provider({ children }: FormProviderProps) {
       })
       .then((res) => {
         console.log("success");
-        setNominations!((prev) => [...prev, res?.data.data]);
+        setNominations((prev) => [...prev, res?.data.data]);
         router.push("/submitted");
         if (res?.status !== 200) {
           console.log(res);
@@ -66,14 +69,12 @@ export default function Provider({ children }: FormProviderProps) {
       >
         {children}
       </form>
-      <ToastContainer />
     </FormProvider>
   );
 }
 
 interface FormProviderProps {
   children: React.ReactNode;
-  authToken?: string;
 }
 
 //see if you can fix th resolver type warning

@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, children }) => {
 
   return (
     <div className="fixed inset-0 bg-primary-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-primary-white max-w-[500px] shadow-strong">
+      <div className="bg-primary-white w-full lg:max-w-[500px] shadow-strong lg:static fixed bottom-0 lg:bottom-auto">
         {children}
       </div>
     </div>

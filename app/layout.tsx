@@ -6,6 +6,8 @@ import Navbar from "@/components/layout/Navbar";
 import { cookies } from "next/headers";
 import { AppProvider } from "@/lib/hooks/useAppContext";
 import { getNomination, getNominees } from "@/lib/server-actions";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const poppins = Poppins({
   weight: "700",
@@ -29,13 +31,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  //turn this into a custom hook
-  let nominees = null;
-  let nominations = null;
-  let auth = cookies().get("auth-token")?.value;
-
-  if (auth) nominations = await getNomination();
-  if (auth) nominees = await getNominees();
+  const authCookie = cookies().get("auth-token")?.value;
+  const nominations = authCookie ? await getNomination() : null;
+  const nominees = authCookie ? await getNominees() : null;
 
   return (
     <html lang="en">
@@ -44,7 +42,7 @@ export default async function RootLayout({
       >
         <AppProvider
           initialValues={{
-            authToken: auth!,
+            authToken: authCookie!,
             nominations: nominations,
             nominees: nominees,
           }}
@@ -55,6 +53,7 @@ export default async function RootLayout({
             <div className="absolute bottom-[-635px] left-[-399px] 2xl:h-full 2xl:w-full 2xl:bottom-0 2xl:left-0  h-[1310px] w-[1839px] bg-blob-pattern bg-no-repeat bg-cover z-0 " />
           </main>
           <Footer />
+          <ToastContainer />
         </AppProvider>
       </body>
     </html>
