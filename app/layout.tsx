@@ -48,7 +48,7 @@ export const metadata = {
     siteName: "CUBE OF THE MONTH NOMINATIONS",
     images: [
       {
-        url: "/og-img.jpeg",
+        url: "/og-img.png",
         width: 800,
         height: 600,
         alt: "Cube of the month",
