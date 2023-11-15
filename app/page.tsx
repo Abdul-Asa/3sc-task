@@ -53,3 +53,4 @@ export default async function Home() {
 //add Meta data
 //seperate svg icons into Icon file
 //break down custom table
+//add comments and refactorr messy code

@@ -21,9 +21,44 @@ const anon_pro = Anonymous_Pro({
   variable: "--font-anon-pro",
 });
 
-export const metadata: Metadata = {
-  title: "Cube Nominations",
-  description: "Made by Shehu",
+export const metadata = {
+  title: "CUBE OF THE MONTH NOMINATIONS",
+  description: "3SC Web Developer Task - Cube Academy",
+  keywords: [
+    "Cube Academy",
+    "Academy",
+    "Tailwind CSS",
+    "Nextjs",
+    "3 sided cude",
+  ],
+  authors: [
+    {
+      name: "abdul-asa",
+      url: "https://asa-dev.vercel.app/",
+    },
+  ],
+  creator: "Abdullah Shehu",
+
+  openGraph: {
+    type: "website",
+    locale: "en_UK",
+    url: "https://3sc-task.vercel.app/",
+    title: "CUBE OF THE MONTH NOMINATIONS",
+    description: "3SC Web Developer Task - Cube Academy",
+    siteName: "CUBE OF THE MONTH NOMINATIONS",
+    images: [
+      {
+        url: "/og-img.jpeg",
+        width: 800,
+        height: 600,
+        alt: "Cube of the month",
+      },
+    ],
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default async function RootLayout({

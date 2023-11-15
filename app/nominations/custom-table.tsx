@@ -130,17 +130,17 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
                   : subtractArrays(nominations, closedList)
                 ).map((nomination) => (
                   <TableRow key={nomination.nomination_id}>
-                    <TableCell className="max-w-[150px]">
+                    <TableCell className="max-w-[200px] w-[200px]">
                       <p className="truncate">
                         {getFullName(nominees, nomination.nominee_id)}
                       </p>
                     </TableCell>
-                    <TableCell className="max-w-[200px]">
+                    <TableCell className="max-w-[200px] w-[200px]">
                       <p className="truncate">
                         {formatDate(nomination.date_submitted)}
                       </p>
                     </TableCell>
-                    <TableCell className="max-w-[200px]">
+                    <TableCell className="max-w-[200px] w-[200px]">
                       <p className="truncate">
                         {formatDate(nomination.closing_date)}
                       </p>
@@ -148,12 +148,12 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
                     <TableCell className="w-[400px]">
                       <p className="truncate">{nomination.reason}</p>
                     </TableCell>
-                    <TableCell className="max-w-[150px]">
+                    <TableCell className="max-w-[150px] w-[150px]">
                       <p className="truncate">
                         {formatProcess(nomination.process)}
                       </p>
                     </TableCell>
-                    <TableCell className="max-w-[120px] gap-4 flex">
+                    <TableCell className="max-w-[120px] w-[120px] gap-4 flex">
                       <DeleteNomination id={nomination.nomination_id} />
                       <button
                         disabled={type == "closed"}
