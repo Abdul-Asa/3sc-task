@@ -30,5 +30,3 @@ export default async function Nominations() {
   );
 }
 
-//abstract the components into a separate file
-//do closed later

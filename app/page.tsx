@@ -6,6 +6,7 @@ import StickyDrawer from "@/components/ui/sticky-drawer";
 import { Button } from "@/components/ui/button";
 
 export default async function Home() {
+  //Add a rewrite instead in the next.config.js file
   const isAuthenticated = cookies().get("auth-token");
   if (!isAuthenticated) {
     redirect("/register", RedirectType.replace);

@@ -34,7 +34,7 @@ Overall, I had a blast working on this project! Diving into TypeScript and playi
 This task was more than just a test for me; it was a journey packed with growth and excitement. I really hope to bring this energy and passion to Cube Academy's team. Fingers crossed and looking forward to possibly joining you guys soon! Last but not the least heres a comparison image:
 
 _My homepage Screenshot_
-![Homepage Screenshot](/public/screenshot.png)
+![Homepage Screenshot](./public/home-screenshot.png)
 
 _Figma Design Screenshot_
-![Figma Design Screenshot](/public/figma-design.png)
+![Figma Design Screenshot](./public/figma-design.png)

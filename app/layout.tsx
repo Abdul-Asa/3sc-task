@@ -95,4 +95,5 @@ export default async function RootLayout({
   );
 }
 
-//Refactor the main and div tw to use cn
+//Refactor the tailwind. Too messy. Use the cn function to make it cleaner
+//If you're using the ! type assertion, you're probably doing it wrong. Fix up the authCookie code.

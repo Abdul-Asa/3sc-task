@@ -114,4 +114,4 @@ export default async function Register() {
   );
 }
 
-//add form validation
+//add form validation and server feedback

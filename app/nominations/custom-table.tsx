@@ -338,3 +338,4 @@ const ClosedNominations = () => {
 };
 
 //too complex...break it down into smaller components
+//too many ternary conditions

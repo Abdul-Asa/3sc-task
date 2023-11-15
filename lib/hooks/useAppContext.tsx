@@ -1,7 +1,6 @@
 "use client";
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { NominationRes, NomineeRes } from "../types";
-import { usePathname } from "next/navigation";
 
 export interface AppContextProps {
   nominees: NomineeRes;

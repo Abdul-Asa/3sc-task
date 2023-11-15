@@ -77,6 +77,5 @@ interface FormProviderProps {
   children: React.ReactNode;
 }
 
-//see if you can fix th resolver type warning
-//abstarct all functiosn
-//abdstract all  ui interface props
+//Fix the typescript errors on the yupResolver. Go read their docs
+
