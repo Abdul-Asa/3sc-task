@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 import { AppProvider } from "@/lib/hooks/useAppContext";
 import { getNomination, getNominees } from "@/lib/server-actions";
 import { ToastContainer } from "react-toastify";
+import { Analytics } from "@vercel/analytics/react";
 import "react-toastify/dist/ReactToastify.css";
 
 const poppins = Poppins({
@@ -90,6 +91,7 @@ export default async function RootLayout({
           <Footer />
           <ToastContainer />
         </AppProvider>
+        <Analytics />
       </body>
     </html>
   );
