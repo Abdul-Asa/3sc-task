@@ -22,7 +22,7 @@ export async function submitLogin(formData: FormData) {
 }
 
 export async function submitRegister(formData: FormData) {
-  const endpoint = `${baseUrl}/api/login`;
+  const endpoint = `${baseUrl}/api/register`;
   try {
     const response = await axios.post(endpoint, formData);
     // notifySuccess(response.data.data.authToken);
