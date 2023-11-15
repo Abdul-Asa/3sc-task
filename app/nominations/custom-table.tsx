@@ -197,7 +197,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
                   : subtractArrays(nominations, closedList)
                 ).map((nomination) => (
                   <TableRow key={nomination.nomination_id} className="flex">
-                    <TableCell className="w-full">
+                    <TableCell className=" w-[200px] max-w-[200px]">
                       <p className="truncate mb-2 font-poppins">
                         {getFullName(nominees, nomination.nominee_id)}
                       </p>
