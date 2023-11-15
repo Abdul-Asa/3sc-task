@@ -22,3 +22,7 @@ export type NomineeRes = {
 export interface CustomFormProps {
   placeholder: string;
 }
+
+export type DeleteNominationRes = {
+  data: string;
+};

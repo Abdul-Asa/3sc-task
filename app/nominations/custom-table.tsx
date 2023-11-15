@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import Modal from "@/components/ui/modal";
 import axios from "axios";
 import StickyDrawer from "@/components/ui/sticky-drawer";
+import { DeleteNominationRes } from "@/lib/types";
 
 type CustomTableProps = {
   today: Date;
@@ -61,7 +62,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ today, type }) => {
           Authorization: `Bearer ${authToken}`,
         },
       })
-      .then((res: any) => {
+      .then((res: DeleteNominationRes) => {
         console.log("success", res);
         notify();
         setNominations(
