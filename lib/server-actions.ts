@@ -10,14 +10,14 @@ export async function submitLogin(formData: FormData) {
   const endpoint = `${baseUrl}/api/login`;
   try {
     const response = await axios.post(endpoint, formData);
-    // notifySuccess(response.data.data.authToken);
     cookies().set("auth-token", response.data.data.authToken);
-  } catch (error) {
-    // notifyError(error);
-    console.error("There was an error submitting the form", error);
-  }
-  if (cookies().get("auth-token")) {
-    redirect("/", RedirectType.push);
+    if (cookies().get("auth-token")) {
+      redirect("/", RedirectType.push);
+    }
+    return response.data;
+  } catch (error: any) {
+    console.error("There was an error submitting the form", error.response);
+    return error.response.data;
   }
 }
 
@@ -25,14 +25,14 @@ export async function submitRegister(formData: FormData) {
   const endpoint = `${baseUrl}/api/register`;
   try {
     const response = await axios.post(endpoint, formData);
-    // notifySuccess(response.data.data.authToken);
     cookies().set("auth-token", response.data.data.authToken);
-  } catch (error) {
-    // notifyError(error);
-    console.error("There was an error submitting the form", error);
-  }
-  if (cookies().get("auth-token")) {
-    redirect("/", RedirectType.push);
+    if (cookies().get("auth-token")) {
+      redirect("/", RedirectType.push);
+    }
+    return response.data;
+  } catch (error: any) {
+    console.error("There was an error submitting the form", error.response);
+    return error.response.data;
   }
 }
 

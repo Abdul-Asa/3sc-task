@@ -1,8 +1,7 @@
-import { submitRegister, submitLogin } from "@/lib/server-actions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cookies } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import RegisterForm from "./register";
 
 export default async function Register() {
   const isAuthenticated = cookies().get("auth-token");
@@ -21,93 +20,10 @@ export default async function Register() {
           <TabsTrigger value="login">Login</TabsTrigger>
         </TabsList>
         <TabsContent value="register">
-          <form
-            action={submitRegister}
-            className="flex h-full flex-col gap-4 p-8 "
-          >
-            <div className="flex flex-col gap-2">
-              <label className="font-bold uppercase lg:text-[16px] font-poppins">
-                <span className="text-secondary-pink">* </span>
-                Name
-              </label>
-              <input
-                type="text"
-                className="py-2 px-4 border font-anonpro text-primary-black border-primary-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-pink focus-visible:border-transparent "
-                placeholder="John Doe"
-                required
-                minLength={3}
-                name="name"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="font-bold uppercase lg:text-[16px] font-poppins">
-                <span className="text-secondary-pink">* </span>
-                Email
-              </label>
-              <input
-                type="email"
-                className="py-2 px-4 border font-anonpro text-primary-black border-primary-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-pink focus-visible:border-transparent "
-                placeholder="JohnDoe@email.com"
-                required
-                name="email"
-              />
-            </div>{" "}
-            <div className="flex flex-col gap-2">
-              <label className="font-bold uppercase lg:text-[16px] font-poppins">
-                <span className="text-secondary-pink">* </span>
-                password
-              </label>
-              <input
-                type="password"
-                className="py-2 px-4 border font-anonpro text-primary-black border-primary-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-pink focus-visible:border-transparent "
-                placeholder="John Doe"
-                required
-                minLength={6}
-                name="password"
-              />
-            </div>
-            <Button className="mt-4" type="submit">
-              Register
-            </Button>
-          </form>
+          <RegisterForm type="register" />
         </TabsContent>
         <TabsContent value="login">
-          <form
-            action={submitLogin}
-            className="flex justify-evenly flex-col gap-4 p-8 "
-          >
-            <div className="flex flex-col gap-2">
-              <label className="font-bold uppercase lg:text-[16px] font-poppins">
-                <span className="text-secondary-pink">* </span>
-                Email
-              </label>
-              <input
-                type="email"
-                className="py-2 px-4 border font-anonpro text-primary-black border-primary-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-pink focus-visible:border-transparent "
-                placeholder="JohnDoe@email.com"
-                required
-                name="email"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="font-bold uppercase lg:text-[16px] font-poppins">
-                <span className="text-secondary-pink">* </span>
-                password
-              </label>
-              <input
-                type="password"
-                className="py-2 px-4 border font-anonpro text-primary-black border-primary-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-pink focus-visible:border-transparent "
-                placeholder="Password"
-                required
-                name="password"
-                minLength={6}
-              />
-            </div>
-
-            <Button className="mt-8" type="submit">
-              Login
-            </Button>
-          </form>
+          <RegisterForm type="login" />
         </TabsContent>
       </Tabs>
     </main>
