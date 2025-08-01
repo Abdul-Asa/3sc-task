@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Poppins, Anonymous_Pro } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
@@ -96,6 +95,3 @@ export default async function RootLayout({
     </html>
   );
 }
-
-//Refactor the tailwind. Too messy. Use the cn function to make it cleaner
-//If you're using the ! type assertion, you're probably doing it wrong. Fix up the authCookie code.

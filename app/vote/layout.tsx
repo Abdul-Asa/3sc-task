@@ -1,17 +1,11 @@
 import Provider from "@/components/forms/FormProvider";
 import ProgressBar from "@/components/forms/ProgressBar";
-import { cookies } from "next/headers";
-import { RedirectType, redirect } from "next/navigation";
 
 export default function VoteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const isAuthenticated = cookies().get("auth-token");
-  if (!isAuthenticated) {
-    redirect("/register", RedirectType.replace);
-  }
   return (
     <Provider>
       <section className="relative flex h-full lg:w-[800px] overflow-scroll lg:min-h-[500px] lg:max-h-[800px] w-full flex-col items-center  justify-center lg:p-8 bg-primary-white">

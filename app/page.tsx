@@ -1,17 +1,8 @@
-import Link from "next/link";
-import { cookies } from "next/headers";
-import { RedirectType, redirect } from "next/navigation";
 import Image from "next/image";
 import StickyDrawer from "@/components/ui/sticky-drawer";
 import { Button } from "@/components/ui/button";
 
 export default async function Home() {
-  //Add a rewrite instead in the next.config.js file
-  const isAuthenticated = cookies().get("auth-token");
-  if (!isAuthenticated) {
-    redirect("/register", RedirectType.replace);
-  }
-
   return (
     <div className="relative flex w-full h-full items-center lg:pt-10 lg:pb-20 justify-center z-[1]">
       <div className="relative flex h-full lg:w-[800px] lg:min-h-[500px] lg:max-h-[800px]  w-full flex-col items-center pb-10 justify-evenly gap-6 bg-primary-white">

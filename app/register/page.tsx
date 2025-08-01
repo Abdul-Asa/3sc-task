@@ -1,14 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cookies } from "next/headers";
-import { redirect, RedirectType } from "next/navigation";
 import RegisterForm from "./register";
 
 export default async function Register() {
-  const isAuthenticated = cookies().get("auth-token");
-  if (isAuthenticated) {
-    redirect("/", RedirectType.replace);
-  }
-
   return (
     <main className="relative h-full max-w-[500px] w-full mx-auto lg:p-8 pt-8 items-center justify-center  z-[1] ">
       <Tabs
