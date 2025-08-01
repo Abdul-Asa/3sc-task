@@ -12,6 +12,7 @@ export default async function Home() {
             fill
             className="object-cover object-center"
             alt="Person at a schedule board"
+            unoptimized={true}
           />
         </div>
         <div className="w-full p-6 lg:px-20 mb-32 lg:m-0 py-2 flex flex-col justify-center text-center relative gap-2 lg:gap-6">

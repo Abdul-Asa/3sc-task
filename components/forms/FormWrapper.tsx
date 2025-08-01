@@ -23,6 +23,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({
           fill
           className="object-cover object-center"
           alt="Background image"
+          unoptimized={true}
         />
       </div>
       <div
